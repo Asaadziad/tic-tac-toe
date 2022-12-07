@@ -18,6 +18,7 @@ class Player {
 class Game {
     constructor(started) {
         this.started = this.start();
+        this.players = [];
     }
     start() {
         let first = new Player("asaad", "X", true);
@@ -30,10 +31,11 @@ class Game {
     stop() {
         this.started = false;
     }
+    addPlayer(p) {
+        this.players.push(p);
+    }
 }
-function updateCell() {
-    console.log("test");
-}
+function updateCell() { }
 function displayBoard() {
     var _a;
     const board = document.getElementById("board");

@@ -19,8 +19,10 @@ class Player {
 }
 class Game {
   private started: boolean;
+  private players: Player[];
   constructor(started: boolean) {
     this.started = this.start();
+    this.players = [];
   }
   start() {
     let first: Player = new Player("asaad", "X", true);
@@ -33,10 +35,11 @@ class Game {
   stop() {
     this.started = false;
   }
+  addPlayer(p: Player) {
+    this.players.push(p);
+  }
 }
-function updateCell(): void {
-  console.log("test");
-}
+function updateCell(): void {}
 
 function displayBoard(): void {
   const board = document.getElementById("board");

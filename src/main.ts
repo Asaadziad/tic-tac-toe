@@ -20,14 +20,19 @@ class Player {
 class Game {
   private started: boolean;
   private players: Player[];
-  constructor(started: boolean) {
-    this.started = this.start();
+  constructor() {
+    this.started = false;
     this.players = [];
   }
   start() {
+    if (this.players.length <= 0) {
+      assignPlayers(2);
+      return;
+    }
+    displayBoard();
     let first: Player = new Player("asaad", "X", true);
     let second: Player = new Player("test", "O", false);
-    return true;
+    this.started = true;
   }
   isStarted() {
     return this.started;
@@ -39,7 +44,19 @@ class Game {
     this.players.push(p);
   }
 }
-function updateCell(): void {}
+
+let g: Game = new Game();
+const startBtn = document.getElementById("startGame");
+if (startBtn) {
+  startBtn.addEventListener("click", () => {
+    startBtn.style.display = "none";
+    g.start();
+  });
+}
+
+function updateCell(): void {
+  console.log(g.isStarted());
+}
 
 function displayBoard(): void {
   const board = document.getElementById("board");
@@ -55,4 +72,8 @@ function displayBoard(): void {
   }
 }
 
-displayBoard();
+function assignPlayers(pNumber: number) {
+  for (let i = 0; i < pNumber; i++) {
+    console.log(i);
+  }
+}

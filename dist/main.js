@@ -16,14 +16,19 @@ class Player {
     }
 }
 class Game {
-    constructor(started) {
-        this.started = this.start();
+    constructor() {
+        this.started = false;
         this.players = [];
     }
     start() {
+        if (this.players.length <= 0) {
+            assignPlayers(2);
+            return;
+        }
+        displayBoard();
         let first = new Player("asaad", "X", true);
         let second = new Player("test", "O", false);
-        return true;
+        this.started = true;
     }
     isStarted() {
         return this.started;
@@ -35,7 +40,17 @@ class Game {
         this.players.push(p);
     }
 }
-function updateCell() { }
+let g = new Game();
+const startBtn = document.getElementById("startGame");
+if (startBtn) {
+    startBtn.addEventListener("click", () => {
+        startBtn.style.display = "none";
+        g.start();
+    });
+}
+function updateCell() {
+    console.log(g.isStarted());
+}
 function displayBoard() {
     var _a;
     const board = document.getElementById("board");
@@ -50,4 +65,8 @@ function displayBoard() {
             .getElementById(`cell${i}`)) === null || _a === void 0 ? void 0 : _a.addEventListener("click", updateCell);
     }
 }
-displayBoard();
+function assignPlayers(pNumber) {
+    for (let i = 0; i < pNumber; i++) {
+        console.log(i);
+    }
+}

@@ -1,0 +1,25 @@
+.container {
+  &.gameContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & .gameBoard {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      width: 50%;
+      & .cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: x-large;
+        font-weight: bold;
+        border: 1px solid black;
+        height: 20vh;
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(242, 242, 242, 0.8);
+        }
+      }
+    }
+  }
+}

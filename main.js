@@ -1,35 +1,23 @@
-class Game {
-  constructor() {
-    this.started = false;
-  }
-  isStarted() {
-    return this.started;
-  }
-  start() {
-    this.started = true;
-    displayController("start-game");
-  }
-  get(propName) {
-    return this[propName];
-  }
-  set(propName, value) {
-    this[propName] = value;
-  }
-}
+import Game from "./src/Game.js";
+import { displayBoard, sendAlert } from "./src/DisplayController.js";
+import { assignPlayer } from "./src/Player.js";
 
 const game = new Game();
+
 const startBtn = document.getElementById("startGame");
 
 startBtn &&
   startBtn.addEventListener("click", () => {
-    game.start();
+    let p = new Promise((resolve, reject) => {
+      let a = assignPlayer(2);
+      if (a) {
+        resolve("false");
+      } else {
+        reject(["test", "danger"]);
+      }
+    });
+    // game.start();
+    p.then((val) => displayBoard(val)).catch((err) =>
+      sendAlert(err[0], err[1])
+    );
   });
-
-function displayController(element) {
-  //Will control every DOM in "content" div, takes the element to display as argument
-  const content = document.getElementById("content");
-  content.innerHTML = "";
-  if (element === "start-game") {
-    content.innerHTML += "<h1>Game starting</h1>";
-  }
-}
